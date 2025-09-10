@@ -1,277 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Resume & Contact</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- This title is used for tabs and bookmarks -->
+	<title>Experiment 1 - Generating Text /</title>
 
-  <!-- ====== Inline Styles (matches your existing look) ====== -->
-  <style>
-    /* ========================================================
-       COLOR THEMES
-       ======================================================== */
-    :root {
-      --background: rgb(92,105,162);
-      --color1: rgb(120,72,32);
-      --color2: #808080;
-      --text: #ffffff;
-      --accent: #16e17f;
-      --box-bg: #3a2f4f;
-      --box-border: #ffcc66;
-      --box-shadow-inset: #1e1e2f;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --background: #000000;
-        --color1: #343434;
-        --color2: #676767;
-        --text: #e4e4e4;
-      }
-    }
+	<!-- Use UTF character set, a good idea with any webpage -->
+	<meta charset="UTF-8" />
+	<!-- Set viewport so page remains consistently scaled w narrow devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    /* ========================================================
-       BASE
-       ======================================================== */
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--background);
-      color: var(--text);
-      font-family: "Courier New", Courier, monospace;
-      overflow-x: hidden;
-    }
+	<!-- Include CSS file, including a site-wide CSS and for this particular page -->
+	<link rel="stylesheet" type="text/css" href="../css/site.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 
-    main {
-      max-width: 1200px;
-      margin: 2rem auto 4rem;
-      padding: 0 1rem;
-    }
+	<!-- Load jQuery library -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+	<!-- Load p5.js library -->
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
 
-    h1, h2 {
-      text-align: center;
-      margin: 0.25rem 0;
-    }
-
-    /* ========================================================
-       PIXEL BOX
-       ======================================================== */
-    .pixel-box {
-      background-color: var(--box-bg);
-      border: 3px solid var(--box-border);
-      padding: 1rem;
-      border-radius: 6px;
-      box-shadow: inset 0 0 0 2px var(--box-shadow-inset), 4px 4px 0 #000;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .pixel-box:hover {
-      transform: scale(1.01);
-      box-shadow: inset 0 0 0 2px var(--box-border), 6px 6px 0 #000;
-    }
-    .pixel-box h1,
-    .pixel-box h2 {
-      color: var(--box-border);
-    }
-    .pixel-box p,
-    .pixel-box label,
-    .pixel-box input,
-    .pixel-box textarea {
-      color: #e0e0f0;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    /* ========================================================
-       LAYOUT
-       ======================================================== */
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-    @media (min-width: 960px) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
-        align-items: start;
-      }
-    }
-
-    .title-box {
-      max-width: 900px;
-      margin: 1rem auto 2rem;
-    }
-
-    /* ========================================================
-       RESUME BOX (EMBED)
-       ======================================================== */
-    .resume-embed {
-      aspect-ratio: 8.5/11; /* letter-ish; keeps good ratio */
-      width: 100%;
-      border: 0;
-      background: #222;
-      border-radius: 4px;
-      box-shadow: 0 0 0 2px rgba(0,0,0,0.25) inset;
-    }
-    .resume-actions {
-      margin-top: 0.75rem;
-      display: flex;
-      gap: 0.75rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-block;
-      border: 2px solid var(--box-border);
-      padding: 0.45rem 0.75rem;
-      text-decoration: none;
-      color: var(--text);
-      background: transparent;
-      border-radius: 6px;
-      box-shadow: 2px 2px 0 #000;
-      transition: transform 0.15s ease;
-      font-weight: bold;
-    }
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    /* ========================================================
-       CONTACT FORM
-       ======================================================== */
-    form {
-      display: grid;
-      gap: 0.75rem;
-    }
-    .row {
-      display: grid;
-      gap: 0.75rem;
-      grid-template-columns: 1fr;
-    }
-    @media (min-width: 600px) {
-      .row.two {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    label {
-      font-weight: bold;
-      color: var(--box-border);
-      display: block;
-      margin-bottom: 0.25rem;
-    }
-    input[type="text"],
-    input[type="email"],
-    textarea {
-      width: 100%;
-      padding: 0.6rem 0.7rem;
-      border: 2px solid var(--box-border);
-      background: rgba(0,0,0,0.25);
-      border-radius: 6px;
-      outline: none;
-    }
-    textarea {
-      min-height: 160px;
-      resize: vertical;
-    }
-    .actions {
-      display: flex;
-      gap: 0.75rem;
-      justify-content: flex-end;
-      margin-top: 0.5rem;
-    }
-    .btn-accent {
-      border-color: var(--accent);
-      color: #101010;
-      background: var(--accent);
-    }
-    .helper {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      margin-top: 0.25rem;
-    }
-  </style>
+	<!-- Link to javascript files - DEFER waits until all elements are rendered -->
+    <script type="text/javascript" src="../js/site.js" DEFER></script>
+	<!-- Use me for a JavaScript OOP Project -->
+	<script type="text/javascript" src="./js/project.js" DEFER></script>
+	<!-- Use me for a p5.js project -->
 </head>
-
 <body>
-  <main>
-    <!-- Title -->
-    <section class="pixel-box title-box">
-      <h1>Resume & Contact</h1>
-      <p class="helper" style="text-align:center">View or download my resume, or send me a message directly.</p>
-    </section>
+	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
+	<main id="content">
+		<section>
 
-    <!-- Two-column grid on desktop -->
-    <section class="grid">
-      <!-- =================== RESUME =================== -->
-      <article class="pixel-box">
-        <h2>Resume</h2>
-        <iframe
-          class="resume-embed"
-          src="https://docs.google.com/document/d/193wivIJmtdmOP2d4e6u2LlR6O_kkiwZUzm5NpEeifhQ/preview"
-          allow="clipboard-read; clipboard-write"
-        ></iframe>
+			<h1>Experiment 1 - Generating Text / Stories</h1>
 
-        <div class="resume-actions">
-          <a class="btn" href="https://docs.google.com/document/d/193wivIJmtdmOP2d4e6u2LlR6O_kkiwZUzm5NpEeifhQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Open in Google Docs</a>
-          <a class="btn" href="https://docs.google.com/document/d/193wivIJmtdmOP2d4e6u2LlR6O_kkiwZUzm5NpEeifhQ/export?format=pdf" target="_blank" rel="noopener noreferrer">Download PDF</a>
-        </div>
-      </article>
+			<div class="minor-section">
+				
+				<div id="glitch-wrapper">
+					<!-- canvas will be added here -->
+					<div class="glitch-output">
+						<button id="clicker">reroll</button>
+						<div id="box"></div>
+					</div>
+				</div>
+			</div>
 
-      <!-- =================== CONTACT =================== -->
-      <article class="pixel-box">
-        <h2>Contact Me</h2>
-        <form id="contact-form">
-          <div class="row two">
-            <div>
-              <label for="name">Your Name</label>
-              <input id="name" name="name" type="text" placeholder="Jane Doe" required />
-            </div>
-            <div>
-              <label for="email">Your Email</label>
-              <input id="email" name="email" type="email" placeholder="jane@example.com" required />
-            </div>
-          </div>
+			<div class="minor-section">
+				<h2>Description</h2>
+				<p>This Experiment was done to try and make a story engine, that would randomly make a basic plot for a story,keeping genre in mind. For example, while each run would be a random roll of genres, subgenres, and characters,</p>
+				<p>I made it so that you wouldnt find a wizard in a sci fi western shootout, because while that may be interesting, it'd certainly be hard to write.</p>
+			</div>
 
-          <div>
-            <label for="subject">Subject</label>
-            <input id="subject" name="subject" type="text" placeholder="Regarding your portfolio…" required />
-          </div>
+			<div class="minor-section">
+				<h2>Technical</h2>
+				<p>Basically I made several groupings based on genres, so each genre, sci fi, fantasy, horror, mystery etc, would have a list of different subgenres, characters, moods, and other descriptors to make story generation more specific.</p>
+				<p>When the generator picked a general genre at random, it would be filtered into these lists. If the generator picked the mystery genre, some sub genres would be "Noir", "Supernatural", "Historical", and some characters would be detective, librarian, or reporter, etc.</p>
+			</div>
 
-          <div>
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Write your message…" required></textarea>
-          </div>
+			<div class="minor-section">
+				<h2>Reflection</h2>
+				<p>It had been a while since I had used HTML and javascript in these ways, so It was a slow start, but really my main difficulties was in getting what I made in glitch to work in this website. I had multiple struggles and hurdles with getting formatting</p>
+				<p>and other things working the same way it worked in glitch. It was mildly frustrating, but it just reminds me that in the future ill have to think about my code with the formatting of this website in mind, so that the architecture of my code blends well into the architecture of this site.</p>
+			</div>
 
-          <p class="helper">This form opens your email client with a pre-filled message (no server needed).</p>
-
-          <div class="actions">
-            <button type="reset" class="btn">Clear</button>
-            <button type="submit" class="btn btn-accent">Send</button>
-          </div>
-        </form>
-      </article>
-    </section>
-  </main>
-
-  <!-- ====== Minimal JS: build a mailto from form input ====== -->
-  <script>
-    // TODO: set your real inbox here
-    const RECIPIENT_EMAIL = "your@email.com";
-
-    document.getElementById("contact-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const name = document.getElementById("name").value.trim();
-      const fromEmail = document.getElementById("email").value.trim();
-      const subject = document.getElementById("subject").value.trim();
-      const message = document.getElementById("message").value.trim();
-
-      const mailSubject = encodeURIComponent(subject);
-      const mailBody = encodeURIComponent(
-        `From: ${name} <${fromEmail}>\n\n${message}\n\n---\nSent from website contact form`
-      );
-
-      // Open user's email client
-      window.location.href = `mailto:${RECIPIENT_EMAIL}?subject=${mailSubject}&body=${mailBody}`;
-    });
-  </script>
+		</section>
+		<nav id="links" class="minor-section">
+			<!-- Put link back to homepage here. -->
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+		</nav>
+	</main>
 </body>
 </html>

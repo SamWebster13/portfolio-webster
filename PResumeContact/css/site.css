@@ -1,0 +1,341 @@
+/* ========================================================
+   COLOR THEMES
+   ======================================================== */
+body.light {
+  --background: rgb(92, 105, 162);
+  --color1: rgb(120, 72, 32);
+  --color2: #808080;
+  --text: #ffffff;
+  --accent: #16e17f;
+}
+
+body.dark {
+  --background: #000000;
+  --color1: #343434;
+  --color2: #676767;
+  --text: #e4e4e4;
+  --accent: var(--accent);
+}
+
+body {
+  background-color: var(--background);
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  color: var(--text);
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+
+
+/* ========================================================
+   BASE ELEMENTS & LAYOUT
+   ======================================================== */
+h1 {
+  text-align: center;
+}
+
+#content {
+  margin: 10px;
+  padding: 10px;
+  border: solid 1px #808;
+}
+
+.minor-section {
+  padding: 10px;
+  border: solid 1px #A0A0A0;
+}
+
+.grey {
+  color: #aaa;
+}
+
+.scroll {
+  margin-top: auto;
+}
+
+#canvas-container {
+  position: absolute;   /* <-- was fixed */
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* no fixed height here; let the canvas define it */
+  z-index: 0;
+  pointer-events: none; /* keeps UI clickable */
+}
+
+#canvas-container canvas {
+  display: block;
+  pointer-events: none;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+#links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  row-gap: 4rem;      /* vertical space between rows */
+  column-gap: 3rem;
+  /* horizontal space between columns */
+  width: 100%;
+  max-width: 860px;
+  margin: 2rem auto;
+}
+
+
+/* ========================================================
+   CARD STYLING (NAVIGATION BLOCKS)
+   ======================================================== */
+.card {
+  width: 100%;
+  max-width: 500px;
+  text-decoration: none;
+}
+
+nav .card {
+  padding: 0;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  display: flex;
+  text-decoration: none;
+  transition: backdrop-filter 0.3s ease, transform 0.3s ease;
+  transform: scale(1);
+}
+
+nav .card:hover {
+  backdrop-filter: blur(0px);
+  transform: scale(1.03);
+}
+
+
+/* ========================================================
+   PIXEL BOXES (TEXT, TITLES)
+   ======================================================== */
+.pixel-box {
+  background-color: #3a2f4f;
+  border: 3px solid #ffcc66;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 2px #1e1e2f, 4px 4px 0 #000;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pixel-box:hover {
+  transform: scale(1.01);
+  box-shadow: inset 0 0 0 2px #ffcc66, 6px 6px 0 #000;
+}
+
+.pixel-box h1 {
+  color: #ffcc66;
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.pixel-box p {
+  color: #e0e0f0;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+.title-box {
+  max-width: 800px;
+  width: 90%;
+  margin: 1vh auto 0;
+}
+
+.text-box {
+  max-width: 900px;
+  width: 90%;
+  margin: 2rem auto;
+}
+
+/* ========================================================
+   UI OVERLAY MENU SYSTEM
+   ======================================================== */
+
+/* General Blur Reset for Menu Elements */
+#tabs-button,
+#tabs-button *,
+#info-button,
+#info-button *,
+#lightSwitch,
+#lightSwitch *,
+#sunMoon,
+#sunMoon *,
+#tab-buttons-container,
+#tab-buttons-container * {
+  filter: none !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Toggle Menu Button */
+#tabs-button {
+  position: fixed;
+  top: 56px;
+  right: 58px;
+  width: 34px;
+  height: 37px;
+  cursor: pointer;
+  z-index: 1000;
+  background-color: transparent !important;
+}
+
+#tabs-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transition: transform 0.2s ease;
+}
+
+#tabs-button:hover img {
+  transform: scale(1.14);
+}
+
+
+/* === Popup Menu Background === */
+#popup-menu {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  width: 120px;
+  display: none;
+  z-index: 999;
+}
+
+#popup-menu img {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+
+/* === Light Switch Toggle === */
+#lightSwitch {
+  position: fixed;
+  top: 112px;
+  right: 98.85px;
+  width: 36px;
+  display: none;
+  z-index: 999;
+}
+
+#lightSwitch img {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+
+/* === Sun/Moon Icon Display === */
+#sunMoon {
+  position: fixed;
+  top: 115px;
+  right: 35px;
+  width: 48px;
+  display: none;
+  z-index: 999;
+}
+
+#sunMoon img {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+
+/* === Modular Vertical Tab Stack (Ladder) === */
+#tab-buttons-container {
+  position: fixed;
+  top: 193px;
+  right: 42px;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 999;
+}
+
+.tab-button {
+  display: block;
+  width: 66px;
+  height: 75px;
+}
+
+.tab-button img {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.tab-button img:hover {
+  transform: scale(1.1);
+}
+
+
+/* ========================================================
+   INFO BUTTON & POPUP PANEL
+   ======================================================== */
+#custom-button {
+  position: fixed;
+  top: 112px;
+  right: 150px; /* adjust this so it doesn’t overlap others */
+  width: 45px;
+  display: none;
+  z-index: 999;
+  cursor: pointer;
+}
+
+#custom-button img {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+#custom-button img:hover {
+  transform: scale(1.1);
+}
+
+#info-popup {
+  position: fixed;
+  top: 170px;
+  right: 150px;
+  width: 240px;
+  display: none;
+  z-index: 999;
+  background-color: #3a2f4f;
+  border: 3px solid #ffcc66;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 2px #1e1e2f, 4px 4px 0 #000;
+  color: #e0e0f0;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #ffcc66;;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#info-popup a:hover {
+  color: #ffcc66; /* hover color — also customizable */
+  text-decoration: none; 
+}
+/* ========================================================
+   END OF FILE
+   ======================================================== */
