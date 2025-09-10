@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Resume & Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ====== Inline Styles (matches your existing look) ====== -->
+  <style>
+    /* ========================================================
+       COLOR THEMES
+       ======================================================== */
+    :root {
+      --background: rgb(92,105,162);
+      --color1: rgb(120,72,32);
+      --color2: #808080;
+      --text: #232020;
+      --accent: #16e17f;
+      --box-bg: #3a2f4f;
+      --box-border: #ffcc66;
+      --box-shadow-inset: #1e1e2f;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #302741;
+        --color1: #343434;
+        --color2: #676767;
+        --text: #e4e4e4;
+      }
+    }
+
+    /* ========================================================
+       BASE
+       ======================================================== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: "Courier New", Courier, monospace;
+      overflow-x: hidden;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto 4rem;
+      padding: 0 1rem;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin: 0.25rem 0;
+    }
+
+    /* ========================================================
+       PIXEL BOX
+       ======================================================== */
+    .pixel-box {
+      background-color: var(--box-bg);
+      border: 3px solid var(--box-border);
+      padding: 1rem;
+      border-radius: 6px;
+      box-shadow: inset 0 0 0 2px var(--box-shadow-inset), 4px 4px 0 #000;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .pixel-box:hover {
+      transform: scale(1.01);
+      box-shadow: inset 0 0 0 2px var(--box-border), 6px 6px 0 #000;
+    }
+    .pixel-box h1,
+    .pixel-box h2 {
+      color: var(--box-border);
+    }
+    .pixel-box p,
+    .pixel-box label,
+    .pixel-box input,
+    .pixel-box textarea {
+      color: #e0e0f0;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* ========================================================
+       LAYOUT
+       ======================================================== */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 960px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+    }
+
+    .title-box {
+      max-width: 900px;
+      margin: 1rem auto 2rem;
+    }
+
+    /* ========================================================
+       RESUME BOX (EMBED)
+       ======================================================== */
+    .resume-embed {
+      aspect-ratio: 8.5/11; /* letter-ish; keeps good ratio */
+      width: 100%;
+      border: 0;
+      background: #222;
+      border-radius: 4px;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.25) inset;
+    }
+    .resume-actions {
+      margin-top: 0.75rem;
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      border: 2px solid var(--box-border);
+      padding: 0.45rem 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      background: transparent;
+      border-radius: 6px;
+      box-shadow: 2px 2px 0 #000;
+      transition: transform 0.15s ease;
+      font-weight: bold;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    /* ========================================================
+       CONTACT FORM
+       ======================================================== */
+    form {
+      display: grid;
+      gap: 0.75rem;
+    }
+    .row {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 600px) {
+      .row.two {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    label {
+      font-weight: bold;
+      color: var(--box-border);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      box-sizing: border-box;   /* ✅ key fix */
+      padding: 0.6rem 0.7rem;
+      border: 2px solid var(--box-border);
+      background: rgba(0,0,0,0.25);
+      border-radius: 6px;
+      outline: none;
+    }
+    textarea {
+      min-height: 160px;
+      resize: vertical;
+    }
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: flex-end;
+      margin-top: 0.5rem;
+    }
+    .btn-accent {
+      border-color: var(--accent);
+      color: #101010;
+      background: var(--accent);
+    }
+    .helper {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- Title -->
+    <section class="pixel-box title-box">
+      <h1>Resume & Contact</h1>
+      <p class="helper" style="text-align:center">View or download my resume, or send me a message directly.</p>
+    </section>
+
+    <!-- Two-column grid on desktop -->
+    <section class="grid">
+      <!-- =================== RESUME =================== -->
+      <article class="pixel-box">
+        <h2>Resume</h2>
+        <iframe
+          class="resume-embed"
+          src="https://docs.google.com/document/d/193wivIJmtdmOP2d4e6u2LlR6O_kkiwZUzm5NpEeifhQ/preview"
+          allow="clipboard-read; clipboard-write"
+        ></iframe>
+
+        <div class="resume-actions">
+          <a class="btn" href="https://docs.google.com/document/d/193wivIJmtdmOP2d4e6u2LlR6O_kkiwZUzm5NpEeifhQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Open in Google Docs</a>
+          <a class="btn" href="https://docs.google.com/document/d/193wivIJmtdmOP2d4e6u2LlR6O_kkiwZUzm5NpEeifhQ/export?format=pdf" target="_blank" rel="noopener noreferrer">Download PDF</a>
+        </div>
+      </article>
+
+      <!-- =================== CONTACT =================== -->
+      <article class="pixel-box">
+        <h2>Contact Me</h2>
+        <form id="contact-form" action="https://formspree.io/f/xrbajjkr" method="POST">
+  <!-- Honeypot (hidden) -->
+  <input type="text" name="_gotcha" style="display:none">
+
+  <div class="row two">
+    <div>
+      <label for="name">Name</label>
+      <input id="name" type="text" name="name" required>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input id="email" type="email" name="_replyto" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label for="subject">Subject</label>
+      <input id="subject" type="text" name="subject">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+    </div>
+  </div>
+
+  <!-- Optional: set email subject seen in your inbox -->
+  <input type="hidden" name="_subject" value="Portfolio Contact Form">
+
+  <div class="actions">
+    <button type="submit" class="btn-accent">Send</button>
+    <button type="reset">Clear</button>
+  </div>
+
+  <p id="form-status" class="helper" aria-live="polite"></p>
+</form>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const statusEl = document.getElementById('form-status');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    statusEl.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.reset();
+        statusEl.textContent = 'Thanks! Your message was sent.';
+      } else {
+        const data = await res.json().catch(() => ({}));
+        statusEl.textContent = data.errors?.[0]?.message || 'Oops, something went wrong.';
+      }
+    } catch (err) {
+      statusEl.textContent = 'Network error. Please try again.';
+    }
+  });
+</script>
+<div style="text-align:center; margin-top:1.5rem;">
+    <a href="../index.html" class="btn">← Back to Home</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>There and Sam Again</title>
+
+    <!-- Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+
+    <!-- Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <link rel="stylesheet" type="text/css" href="css/homepage.css">
+
+    <!-- p5.js sketch -->
+    <script type="text/javascript" src="./js/sketch.js" defer></script>
+  </head>
+
+  <body class="light">
+    <!-- Fullscreen canvas background -->
+    <div id="canvas-container"></div>
+
+    <!-- Floating UI Overlay -->
+    <!-- Floating UI Overlay -->
+    <div id="ui-overlay">
+      <!-- Menu Button -->
+      <div id="tabs-button">
+        <img src="../img/menuButt.png" alt="Tabs">
+      </div>
+
+      <!-- Menu Background -->
+      <div id="popup-menu">
+        <img src="../img/sunMoonMenu.png" alt="Popup Menu">
+      </div>
+
+      <!-- Light Switch Toggle -->
+      <div id="lightSwitch">
+        <img src="../img/moonOn.png" alt="Light Switch">
+      </div>
+
+      <!-- Sun/Moon Display -->
+      <div id="sunMoon">
+        <img src="../img/moon.png" alt="Moon">
+        <img src="../img/sun.png" alt="Sun">
+      </div>
+
+      <!-- 🔧 New Custom Button -->
+      <div id="custom-button">
+        <img src="../img/IconInfo.png" alt="Custom">
+      </div>
+
+      <!-- Info Popup -->
+      <div id="info-popup" class="pixel-box">
+        <p>Hey! You may notice that the background image here on this page changes whenever you reload into the site. Thats because this background is a procedurally generated image, and will generate based on specific parameters everytime the code is run. This specific sky box I based off of a landscape picture I found on Vecteezy.</p>
+        <p>
+          <a href="https://www.vecteezy.com/vector-art/42056318-8bit-pixel-art-night-sky-game-space-landscape" 
+            target="_blank" 
+            rel="noopener noreferrer">
+            Pixel Night Sky on Vecteezy
+          </a>
+        </p>
+      </div>
+
+      <!-- Modular Tab Stack -->
+      <div id="tab-buttons-container">
+        <a href="./index.html" class="tab-button"><img src="../img/IconHome.png" alt="Home"></a>
+        <a href="./PCGExperiments/index.html" class="tab-button"><img src="../img/IconPCG.png" alt="PCG"></a>
+        <a href="./PJavaScript/index.html" class="tab-button"><img src="../img/IconJS.png" alt="JS"></a>
+        <a href="./PPhotoshop/index.html" class="tab-button"><img src="../img/IconPS.png" alt="PS"></a>
+        <a href="./PIllustrator/index.html" class="tab-button"><img src="../img/IconAI.png" alt="AI"></a>
+      </div>
+    </div>
+
+
+    <!-- Main Page Content -->
+    <main>
+      <section id="overlay-content">
+        <div class="pixel-box title-box">
+          <h1>Samuel Webster's</h1>
+          <h2>Comprehensive Project Portfolio</h2>
+        </div>
+      </section>
+
+      <section id="IntoParagraph">
+        <div class="pixel-box text-box">
+          <p>My name is Samuel Webster, and I’m currently a 3rd year undergraduate student pursuing a Bachelor of Science in Computer Science: Game Design at the University of California, Santa Cruz.</p>
+          <br></br>
+          <p>I’m proficient in JavaScript, Lua, and Phaser, as well as Illustrator and Photoshop for digital artwork. I also have experience with C, C++, Assembly, Python, and Java.</p>
+          <br></br>
+          <p>This portfolio features a range of projects, from interactive coding experiments to creative artwork, reflecting my passion for both the technical and artistic sides of game design.</p>
+          <br></br>
+          <p>At the bottom you will find my contact information and public resume. Thank you for visiting, and I hope you enjoy exploring my work!</p>
+        </div>
+      </section>
+
+      <section id="soil"></section>
+      <section id="water"></section>
+
+      <nav>
+        <div id="links">
+          <a href="./PCGExperiments/index.html" class="card">
+            <div class="pixel-box">
+              <h1>PCG Experiments</h1>
+              <p>Procedural generation, randomized algorithms</p>
+            </div>
+          </a>
+          <a href="experiment4/index.html" class="card">
+            <div class="pixel-box">
+              <h1>Lua Experiments</h1>
+              <p>Card Games, LOVE2D, Lua Code Projects</p>
+            </div>
+          </a>
+          <a href="experiment3/index.html" class="card">
+            <div class="pixel-box">
+              <h1>JavaScript Experiments</h1>
+              <p>Mini Games, Phaser Projects, Flash</p>
+            </div>
+          </a>
+          <a href="experiment5/index.html" class="card">
+            <div class="pixel-box">
+              <h1>Photoshop Works</h1>
+              <p>Pixel Art, Drawings, Concept Art</p>
+            </div>
+          </a>
+          <a href="./PIllustrator/index.html" class="card">
+            <div class="pixel-box">
+              <h1>Illustrator Works</h1>
+              <p>Logos, UI designs, Game Concepts</p>
+            </div>
+          </a>
+          <a href="./PDNDCharacter/index.html" class="card">
+            <div class="pixel-box">
+              <h1>DND Character Builder</h1>
+              <p>A detailed Character builder and Play Tester</p>
+            </div>
+          </a>
+
+          <a href="./PResumeContact/index.html" class="card card--wide">
+            <div class="pixel-box">
+              <h1>Resume & Contact</h1>
+              <p>Get my resume, email, and links to connect.</p>
+            </div>
+          </a>
+
+        </div>
+      </nav>
+    </main>
+
+    <!-- Scripts -->
+    <script>
+      const tabsButton = document.querySelector('#tabs-button');
+      const tabsButtonImg = tabsButton.querySelector('img');
+      const popupMenu = document.querySelector('#popup-menu');
+      const lightSwitch = document.querySelector('#lightSwitch');
+      const sunMoon = document.querySelector('#sunMoon');
+      const customButton = document.querySelector('#custom-button');
+      const tabButtons = document.querySelector('#tab-buttons-container');
+      const infoPopup = document.querySelector('#info-popup');
+      const sunMoonImgs = sunMoon.querySelectorAll('img');
+
+      let menuIsOpen = false;
+      let lightMode = false;
+
+      tabsButton.addEventListener('click', () => {
+        menuIsOpen = !menuIsOpen;
+
+        if (menuIsOpen) {
+          tabsButtonImg.src = '../img/menuOpenButt.png';
+          popupMenu.style.display = 'block';
+          lightSwitch.style.display = 'block';
+          sunMoon.style.display = 'block';
+          tabButtons.style.display = 'flex';
+          customButton.style.display = 'block'; // ✅ SHOW custom button
+          updateSunMoonIcon();
+        } else {
+          tabsButtonImg.src = '../img/menuButt.png';
+          popupMenu.style.display = 'none';
+          lightSwitch.style.display = 'none';
+          sunMoon.style.display = 'none';
+          tabButtons.style.display = 'none';
+          customButton.style.display = 'none'; // ✅ HIDE custom button
+          infoPopup.style.display = 'none'; 
+        }
+      });
+
+      tabsButtonImg.addEventListener('mouseenter', () => {
+        if (!menuIsOpen) tabsButtonImg.src = '../img/menuButtHover.png';
+      });
+      tabsButtonImg.addEventListener('mouseleave', () => {
+        if (!menuIsOpen) tabsButtonImg.src = '../img/menuButt.png';
+      });
+
+      lightSwitch.addEventListener('click', () => {
+        lightMode = !lightMode;
+        document.body.classList.toggle('light', lightMode);
+        document.body.classList.toggle('dark', !lightMode);
+        updateSunMoonIcon();
+        updateLightSwitchIcon();
+      });
+
+      function updateSunMoonIcon() {
+        sunMoonImgs[0].style.display = lightMode ? 'none' : 'block';
+        sunMoonImgs[1].style.display = lightMode ? 'block' : 'none';
+      }
+
+      function updateLightSwitchIcon() {
+        const img = lightSwitch.querySelector('img');
+        img.src = lightMode ? '../img/sunOn.png' : '../img/moonOn.png';
+      }
+
+      customButton.addEventListener('click', () => {
+        const isVisible = infoPopup.style.display === 'block';
+        infoPopup.style.display = isVisible ? 'none' : 'block';
+      });
+    </script>
+  </body>
+</html>
+ 

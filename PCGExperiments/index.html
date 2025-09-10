@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PCG Experiments</title>
+
+  <!-- Libraries -->
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+
+  <!-- Meta -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="../css/site.css">
+  <link rel="stylesheet" type="text/css" href="../css/homepage.css">
+
+  <!-- p5.js sketch -->
+  <script type="text/javascript" src="./sketch.js" defer></script>
+</head>
+
+<body class="light">
+  <!-- Fullscreen canvas background -->
+  <div id="canvas-container"></div>
+
+  <!-- Overlayed Content -->
+  <main>
+    <section id="overlay-content">
+        <div class="pixel-box title-box">
+          <h1>PCG Experiments</h1>
+          <h2>PROCEDURAL GENERATION IN JAVASCRIPT</h2>
+        </div>
+        <div class="pixel-box text-box">
+          <p>A collection of 'procedural generation' demos and algorithmic systems. Each one is an experiment in generative algorithms, both visual and textual, for the purpose of displaying technical skill and ability to create solid, continuous and consistent random content.</p>
+        </div>
+      </section>
+      <section style="height: 250px;"></section>
+
+    <section id="soil"></section>
+    <section id="water"></section>
+
+    <!-- Menu button and toggles -->
+    <div id="ui-overlay">
+      <!-- Menu Button -->
+      <div id="tabs-button">
+        <img src="../img/menuButt.png" alt="Tabs">
+      </div>
+
+      <!-- Menu Background -->
+      <div id="popup-menu">
+        <img src="../img/sunMoonMenu.png" alt="Popup Menu">
+      </div>
+
+      <!-- Light Switch Toggle -->
+      <div id="lightSwitch">
+        <img src="../img/moonOn.png" alt="Light Switch">
+      </div>
+
+      <!-- Sun/Moon Display -->
+      <div id="sunMoon">
+        <img src="../img/moon.png" alt="Moon">
+        <img src="../img/sun.png" alt="Sun">
+      </div>
+
+      <!-- 🔧 New Custom Button -->
+      <div id="custom-button">
+        <img src="../img/IconInfo.png" alt="Custom">
+      </div>
+
+      <!-- Info Popup -->
+      <div id="info-popup" class="pixel-box">
+        <p>Hey again! In keeping with the theme, this background is also a "PCG" background, generated fresh from predetermined specifications, although this one is based on one of my older projects below, as Im sure you'll soon find. The pixel art used can be found here:</p>
+        <p>
+          <a href="https://cdn.glitch.com/723f2e81-515d-43ff-b44a-4e161e0451ed%2Ftileset.png?v=1611598428661" 
+            target="_blank" 
+            rel="noopener noreferrer">
+            Tile Sheet
+          </a>
+        </p>
+      </div>
+
+      <!-- Modular Tab Stack -->
+      <div id="tab-buttons-container">
+        <a href="../index.html" class="tab-button"><img src="../img/IconHome.png" alt="Home"></a>
+        <a href="./index.html" class="tab-button"><img src="../img/IconPCG.png" alt="PCG"></a>
+        <a href="../PJavaScript/index.html" class="tab-button"><img src="../img/IconJS.png" alt="JS"></a>
+        <a href="../PPhotoshop/index.html" class="tab-button"><img src="../img/IconPS.png" alt="PS"></a>
+        <a href="../PIllustrator/index.html" class="tab-button"><img src="../img/IconAI.png" alt="AI"></a>
+      </div>
+      
+    </div>
+
+
+    <!-- Card links -->
+    <nav>
+      <div id="links">
+        <a href="./experiment1/index.html" class="card">
+          <div class="pixel-box">
+            <h1>Story Prompt Generator</h1>
+            <p>Story Plot / Setting / Idea Generator</p>
+          </div>
+        </a>
+        <a href="./experiment2/index.html" class="card">
+          <div class="pixel-box">
+            <h1>Paralax Terrain</h1>
+            <p>Randomized Parralax Mountain ridge</p>
+          </div>
+        </a>
+        <a href="./experiment3/index.html" class="card">
+          <div class="pixel-box">
+            <h1>Biome Mapper</h1>
+            <p>ASCII Controlled Pixel Landscapes</p>
+          </div>
+        </a>
+        <a href="./experiment4/index.html" class="card">
+          <div class="pixel-box">
+            <h1>Starfield Navigator</h1>
+            <p>FTL Style Star Map Galaxy Navigator</p>
+          </div>
+        </a>
+        <a href="./experiment5/index.html" class="card">
+          <div class="pixel-box">
+            <h1>Image Maker</h1>
+            <p>Image Generation Based on Picture Mapping</p>
+          </div>
+        </a>
+        <a href="../index.html" class="card">
+          <div class="pixel-box">
+            <h1>← Back to Home</h1>
+            <p>Return to the Portfolio Main Menu</p>
+          </div>
+        </a>
+      </div>
+    </nav>
+  </main>
+
+  <!-- Tab & toggle logic -->
+<script>
+      const tabsButton = document.querySelector('#tabs-button');
+      const tabsButtonImg = tabsButton.querySelector('img');
+      const popupMenu = document.querySelector('#popup-menu');
+      const lightSwitch = document.querySelector('#lightSwitch');
+      const sunMoon = document.querySelector('#sunMoon');
+      const customButton = document.querySelector('#custom-button');
+      const tabButtons = document.querySelector('#tab-buttons-container');
+      const infoPopup = document.querySelector('#info-popup');
+      const sunMoonImgs = sunMoon.querySelectorAll('img');
+
+      let menuIsOpen = false;
+      let lightMode = false;
+
+      tabsButton.addEventListener('click', () => {
+        menuIsOpen = !menuIsOpen;
+
+        if (menuIsOpen) {
+          tabsButtonImg.src = '../img/menuOpenButt.png';
+          popupMenu.style.display = 'block';
+          lightSwitch.style.display = 'block';
+          sunMoon.style.display = 'block';
+          tabButtons.style.display = 'flex';
+          customButton.style.display = 'block'; // ✅ SHOW custom button
+          updateSunMoonIcon();
+        } else {
+          tabsButtonImg.src = '../img/menuButt.png';
+          popupMenu.style.display = 'none';
+          lightSwitch.style.display = 'none';
+          sunMoon.style.display = 'none';
+          tabButtons.style.display = 'none';
+          customButton.style.display = 'none'; // ✅ HIDE custom button
+        }
+      });
+
+      tabsButtonImg.addEventListener('mouseenter', () => {
+        if (!menuIsOpen) tabsButtonImg.src = '../img/menuButtHover.png';
+      });
+      tabsButtonImg.addEventListener('mouseleave', () => {
+        if (!menuIsOpen) tabsButtonImg.src = '../img/menuButt.png';
+      });
+
+      lightSwitch.addEventListener('click', () => {
+        lightMode = !lightMode;
+        document.body.classList.toggle('light', lightMode);
+        document.body.classList.toggle('dark', !lightMode);
+        updateSunMoonIcon();
+        updateLightSwitchIcon();
+      });
+
+      function updateSunMoonIcon() {
+        sunMoonImgs[0].style.display = lightMode ? 'none' : 'block';
+        sunMoonImgs[1].style.display = lightMode ? 'block' : 'none';
+      }
+
+      function updateLightSwitchIcon() {
+        const img = lightSwitch.querySelector('img');
+        img.src = lightMode ? '../img/sunOn.png' : '../img/moonOn.png';
+      }
+
+      customButton.addEventListener('click', () => {
+        const isVisible = infoPopup.style.display === 'block';
+        infoPopup.style.display = isVisible ? 'none' : 'block';
+      });
+    </script>
+</body>
+</html>

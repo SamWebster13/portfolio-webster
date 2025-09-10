@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Experiment 5 - Evolutionary Impressions</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+  <!-- Libraries -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/addons/p5.dom.min.js"></script>
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="../js/site.js" defer></script>
+  <script type="text/javascript" src="./js/sketch.js" defer></script>
+  <script type="text/javascript" src="./js/project.js" defer></script>
+  
+ 
+</head>
+<body>
+  <main id="content">
+    <section>
+      <h1>Experiment 5 - Evolutionary Impressions</h1>
+
+     <!-- Canvas Section -->
+    <div class="minor-section box-group">
+        <select id="dropper"></select>
+        <button id="restart">
+          restart
+        </button>
+        <div class="box-row">
+          <p id="active"></p>
+          <p>
+            Mutation rate (<span id="rate"></span>%):<br />
+            <input
+              id="slider"
+              type="range"
+              min="1"
+              max="100"
+              value="100"
+            />
+            Shape (<span id="shapeCountLabel">500</span>):<br />
+          <input
+            id="shapeCountSlider"
+            type="range"
+            min="100"
+            max="1000"
+            value="500"
+          />
+          Triangle (<span id="triangleWeightLabel">1</span>):<br />
+          <input
+            id="triangleWeightSlider"
+            type="range"
+            min="0"
+            max="10"
+            value="1"
+          />
+          Ellipse (<span id="ellipseWeightLabel">1</span>):<br />
+          <input
+            id="ellipseWeightSlider"
+            type="range"
+            min="0"
+            max="10"
+            value="1"
+          />
+          Rectangle (<span id="rectWeightLabel">1</span>):<br />
+          <input
+            id="rectWeightSlider"
+            type="range"
+            min="0"
+            max="10"
+            value="1"
+          />
+          </p>
+          <p id="best"></p>
+        </div>
+
+        <!-- NEW SLIDERS BELOW -->
+      
+        <div class="box-row">
+          <p>Active score: <span id="activeScore"></span></p>
+          <p>Exploration rate: <span id="fpsCounter"></span> fps</p>
+          <p>Best score: <span id="bestScore"></span></p>
+        </div>
+        
+        
+      
+        <p id="memory" data-max-items="18"></p>
+    </div>
+    
+	  
+
+      <!-- Description Section -->
+      <div class="minor-section">
+        <h2>Description</h2>
+        <p>
+          This is a image generator, thats trying to replicate the images in the drop down. It randomly creates and draws a set number of images, using color sampling to match up colors, and aranges them to better remake the image.
+        </p>
+      </div>
+
+      <!-- Technical Section -->
+      <div class="minor-section">
+        <h2>Technical</h2>
+        <p>
+          Essentially the generator runs mutations on the shapes and colors, and is given a score based on how close it is to the original image. It remembers this score and what it generated to get there, so the algorithm learns and goes from there, slowly getting closer to the original as it continues to mutate
+        </p>
+      </div>
+
+      <!-- Reflection Section -->
+      <div class="minor-section">
+        <h2>Reflection</h2>
+        <p>
+          This assignment wasnt too hard, it ended up being pretty simple. I managed to get all my stretch goals I wanted done, so im pretty proud of this project.
+        </p>
+      </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav id="links" class="minor-section">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

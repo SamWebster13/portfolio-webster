@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Page title for tabs and bookmarks -->
+	<title>Experiment 2 - Living Impressions</title>
+
+	<!-- Use UTF character set -->
+	<meta charset="UTF-8" />
+
+	<!-- Set viewport to scale on narrow devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Include CSS files -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Load jQuery library -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+
+	<!-- Load p5.js library -->
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+
+	<!-- Link to JavaScript files with DEFER attribute to load after rendering -->
+    <script type="text/javascript" src="../js/site.js" defer></script>
+	<script type="text/javascript" src="./js/project.js" defer></script>
+	<script type="text/javascript" src="./js/sketch.js" defer></script>
+</head>
+<body>
+	<main id="content">
+		<section>
+
+			<!-- Experiment Title -->
+			<h1>Experiment 2 - Living Impressions</h1>
+
+			<!-- Canvas Section -->
+			<div class="minor-section">
+				<button id="fullscreen">Fullscreen</button>
+					<div class="canvas-container">
+						<!-- <button id="reimagine">Reimagine</button>-->
+					</div>
+				<div id="canvas-container" class="glitch-output">
+					<!-- Canvas will be added here dynamically -->
+					<!-- Fullscreen button for the canvas -->
+					
+				</div>
+			</div>
+
+			<!-- Description Section -->
+			<div class="minor-section">
+				<h2>Description</h2>
+				<p>This generator creates a scrollable mountain scape with the early sunrise over steep and jagged cliffs, shading them in the early dawn mist. This project was meant to introduce us to the art capabilities of the p5 js library file, and how we can use it to make generative images. </p>
+			</div>
+
+			<!-- Technical Section -->
+			<div class="minor-section">
+				<h2>Technical</h2>
+				<p>The scene is built using layers of noise, each part of the screen representing a strip of jagged rectangles, similar to torn paper. The closer the mountains are, the more jagged and darker they appear, creating a sense of depth and distance. They're all drawn in a specific order, as layering is vitaly important in making the image.</p>
+			</div>
+
+			<!-- Reflection Section -->
+			<div class="minor-section">
+				<h2>Reflection</h2>
+				<p>This was initially a challenging assignment, and I had to do a lot of research into what I could do with p5. There were some stretch goals I had to abandon for the sake of deadlines, but It did give me a sense of understanding of my capabilities as a coder and is important to create, and what can be done as extra. Below Ill post stretch goals Id want to complete, and strike them through as I finish them:</p>
+				<p>- Mist over the mountains</p>
+				<p>- Increase the detail level of the mountains</p>
+				<p>- have occasional valleys with streams breaking the mountains</p>
+				<p>- animate a night time version, with occasionaly shooting stars</p>
+			</div>
+
+		</section>
+
+		<!-- Navigation Links Section -->
+		<nav id="links" class="minor-section">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+			</ul>
+		</nav>
+	</main>
+
+	<!-- Fullscreen Functionality Script -->
+	<script>
+		// Fullscreen toggle functionality for the canvas
+		document.getElementById("fullscreen").addEventListener("click", function () {
+			var canvas = document.getElementById("myCanvas");
+			if (canvas.requestFullscreen) {
+				canvas.requestFullscreen();
+			} else if (canvas.mozRequestFullScreen) { // Firefox
+				canvas.mozRequestFullScreen();
+			} else if (canvas.webkitRequestFullscreen) { // Chrome, Safari, Opera
+				canvas.webkitRequestFullscreen();
+			} else if (canvas.msRequestFullscreen) { // IE/Edge
+				canvas.msRequestFullscreen();
+			}
+		});
+
+		// p5.js setup function to create canvas and call the scene rendering function
+		function setup() {
+			// Create canvas dynamically inside the canvas-container div
+			let canvas = createCanvas(windowWidth, windowHeight);
+			canvas.parent('canvas-container');  // Attach canvas to the container
+			reseedScene();  // Call your scene rendering function
+		}
+
+		// Example scene generation function
+		function reseedScene() {
+			background(50, 50, 50);  // Set the background to a dark color
+			fill(255, 204, 0);
+			noStroke();
+			ellipse(width / 2, height / 2, 150, 150);  // Draw a simple shape (e.g., sun)
+		}
+	</script>
+
+</body>
+</html>
